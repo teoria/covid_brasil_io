@@ -4,11 +4,11 @@ EXPOSE 8501
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt ./
+COPY ../requirements.txt ./
 
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY .. .
 RUN mkdir -p /root/.streamlit
 
 RUN bash -c 'echo -e "\

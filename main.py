@@ -21,13 +21,14 @@ def get_estado(df, state, city):
 
 def monta_pais():
     df = load_data_brasil_io()
-
-    dados_estado = df[ (df['place_type'] == 'state')]
+    filtro = (df['place_type'] == 'state')
+    dados_estado = df[filtro]
 
     st.subheader(f"Dados de COVID no Brasil")
 
     dados_estado_plot = dados_estado.groupby('date').sum()
     hoje = dados_estado[dados_estado['is_last']].sum()
+    hoje_estados = dados_estado[dados_estado['is_last']]
     dados_estado_plot = dados_estado_plot[:dados_estado_plot.shape[0]-1]
     #st.write(dados_estado_plot)
     dia_atual = 1#dados_estado_plot.first_valid_index#['date'].dt.strftime('%d-%m-%Y')[0]
@@ -41,7 +42,21 @@ def monta_pais():
                 f" **{mortes}** mortes com uma taxa de mortalidade de **{taxa}%**.")
 
     st.line_chart(dados_estado_plot[['confirmed','deaths']])
+    #st.dataframe(hoje_estados)
+    hoje_estados_indice = hoje_estados
+    hoje_estados_indice['estado'] = hoje_estados['state']
+    hoje_estados_indice = hoje_estados.set_index(['state'] )
+    hoje_estados_plot = hoje_estados_indice[['confirmed', 'deaths','estado']]
 
+    import altair as alt
+    st.write(alt.Chart(hoje_estados_plot.sort_index(by=['confirmed'], ascending=False)).mark_bar().encode(
+        x=alt.X('estado', sort=None),
+        y='confirmed',
+    ))
+    st.write(alt.Chart(hoje_estados_plot.sort_index(by=['confirmed'], ascending=False)).mark_bar().encode(
+        x=alt.X('estado', sort=None),
+        y='deaths',
+    ))
 
 def monta_estados():
     df = load_data_brasil_io()

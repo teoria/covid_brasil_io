@@ -9,7 +9,7 @@ def main():
     st.sidebar.title("Covid 19 - Brasil.io")
     st.sidebar.subheader("Dados por município")
     taxa_mortalidade = st.sidebar.number_input('Taxa de mortalidade mundial em %',value=4.0, step=0.1)
-    tipo = st.sidebar.radio("Escolha uma visualização:", ('Municípios', 'Estados', 'Brasil'))
+    tipo = st.sidebar.radio("Escolha uma visualização:", ('Municípios', 'Estados', 'Brasil'), index=2)
 
     if tipo == 'Brasil':
         monta_pais(taxa_mortalidade)
@@ -25,15 +25,16 @@ def main():
         """
         Os dados utilizados nesta aplicação foram disponibilizados pelo Brasil.io 
         [https://brasil.io/covid19/](https://brasil.io/covid19).
-"""
+        """
     )
 
     st.sidebar.title("Autor")
     st.sidebar.info(
         """
-        Esta aplicação é mandtida por Rodrigo Carneiro. Mais informações em 
+        Esta aplicação é mandtida por **Rodrigo Carneiro**. Mais informações em 
         [linkedin.com/in/rodrigoteoria](https://www.linkedin.com/in/rodrigoteoria).
-"""
+        """
     )
+
 if __name__ == "__main__":
     main()

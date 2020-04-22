@@ -31,7 +31,7 @@ def main():
     st.sidebar.title("Autor")
     st.sidebar.info(
         """
-        Esta aplicação é mandtida por **Rodrigo Carneiro**. Mais informações em 
+        Esta aplicação é mantida por **Rodrigo Carneiro**. Mais informações em 
         [linkedin.com/in/rodrigoteoria](https://www.linkedin.com/in/rodrigoteoria).
         """
     )

@@ -3,9 +3,10 @@ import streamlit as st
 from municipio import monta_municipios
 from estado import monta_estados
 from pais import monta_pais
-
+import pandas as pd
 
 def main():
+
     st.sidebar.title("Covid 19 - Brasil.io")
     st.sidebar.subheader("Dados por município")
     taxa_mortalidade = st.sidebar.number_input('Taxa de mortalidade mundial em %',value=4.0, step=0.1)
